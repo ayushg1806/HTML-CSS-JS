@@ -1,0 +1,11 @@
+.card{
+    background-color: red;
+    width: 400px;
+    height: 400px;
+    color: black;
+}
+
+.btn-dark{
+    color: white;
+    background-color: red;
+}
