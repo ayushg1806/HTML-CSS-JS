@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import ReactDOM from "react-dom/client";
 import './index.css'
+import { data} from './data'
 
 function Greeting(){
     const firstName = 'Ayush';
@@ -52,7 +53,7 @@ const BookList = () => {
             {books.map((book, index) => {
                 const {img, title, author} = book;
                 return(
-                    <Book {...book} key={book.id}/>
+                    <Book /*book = {book}*/{...book} key={book.id}/>
                 )
             })}
         </section>
@@ -60,13 +61,61 @@ const BookList = () => {
 }
 
 const Book = ({author, title, img}) => {
+
+    const showTitle = (title) => {
+        console.log('Hello ' + title);
+        
+    }
     return(
         <article className="book">
             <img src={img} alt="book-img" className="book-img" />
-            <h1>{title}</h1>
+            <h1 onClick={() => showTitle(title)}>{title}</h1>
             <h4>{author}</h4>
         </article>
     )
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<BookList />)
+// Hooks - Functions that are already created for us and we have to use them
+// useState
+const UseStateExample = () => {
+    const [people, setPeople] = useState(data)
+
+    const removeItem = (id) => {
+        let newPeople = people.filter((person) => person.id !== id)
+        setPeople(newPeople)
+    }
+
+    return(
+        <>
+            {people.map((person) => {
+                const {id, name} = person;
+                return(
+                    <div className="item" key={id}>
+                        <h4>{name}</h4>
+                        <button onClick={() => removeItem(id)}>Remove</button>
+                    </div>
+                )
+            })}
+            <button onClick={() => setPeople([])}>Clear Items</button>
+        </>
+    )
+}
+
+// useEffect - Gets called upon every re-render; by default runs after every re-render 
+const UseEffectExample = () => {
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+        console.log('call useEffect');
+        document.title = `New Messages (${value})`
+    }, [value])
+
+    return(
+        <>
+            <h1>{value}</h1>
+            <button onClick={() => setValue(value + 1)}>Click me</button>
+        </>
+    )
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<UseEffectExample />)
