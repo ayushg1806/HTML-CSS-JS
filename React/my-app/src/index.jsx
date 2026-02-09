@@ -37,6 +37,12 @@ const books = [
         author: "Peter Thiel",
         img: "https://m.media-amazon.com/images/I/61PDzIhVLnL._AC_UF1000,1000_QL80_.jpg",
         title: "Zero to One"
+    },
+    {   
+        id: 3,
+        author: "Daksh Tyagi",
+        img: "https://m.media-amazon.com/images/I/91ylrTgh-QL._AC_UF1000,1000_QL80_.jpg",
+        title: "A Nation of Idiots"
     }
 ];
 
